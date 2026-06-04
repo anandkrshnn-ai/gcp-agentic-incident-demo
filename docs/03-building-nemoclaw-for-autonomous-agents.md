@@ -1,10 +1,10 @@
-# NVIDIA NemoClaw: Building a Hardened Runtime for Autonomous QE Agents
+# NVIDIA NemoClaw: Building a Hardened Runtime for Autonomous Agents
 
 ## Executive Summary
 
-As we transition from traditional automated testing to **Autonomous Quality Engineering**, the security and isolation of our AI agents become paramount. **NVIDIA NemoClaw** is a professional-grade, opinionated reference stack built on **NVIDIA OpenShell**. It provides a secure, sandboxed environment for agents like OpenClaw, ensuring that test execution, inference calls, and data access are strictly governed by policy.
+As we transition from traditional automated verification to **Autonomous Agent Engineering**, the security and isolation of our AI agents become paramount. **NVIDIA NemoClaw** is a professional-grade, opinionated reference stack built on **NVIDIA OpenShell**. It provides a secure, sandboxed environment for agents like OpenClaw, ensuring that action execution, inference calls, and data access are strictly governed by policy.
 
-In this guide, we explore how to build and deploy NemoClaw to serve as the "hardened host" for our QE intelligence.
+In this guide, we explore how to build and deploy NemoClaw to serve as the "hardened host" for our agent intelligence.
 
 ---
 
@@ -23,14 +23,14 @@ graph LR
     classDef external fill:#f5f5f5,stroke:#e0e0e0,color:#1a1a1a,stroke-width:1px
     classDef user fill:#fff,stroke:#76b900,color:#1a1a1a,stroke-width:2px,font-weight:bold
 
-    USER(["👤 QE Architect"]):::user
+    USER(["👤 AI Architect"]):::user
 
     subgraph EXTERNAL["Inference & Cloud Services"]
         INFERENCE["NVIDIA NIM · OpenAI<br/>Anthropic · Ollama"]:::external
         GH["GitHub · GitLab"]:::external
     end
 
-    subgraph HOST["Secure QE Node"]
+    subgraph HOST["Secure Agent Node"]
 
         subgraph NEMOCLAW["NemoClaw Control Plane"]
             direction TB
@@ -44,7 +44,7 @@ graph LR
             
             subgraph SANDBOX["Sandbox Container (k3s pod) 🔒"]
                 direction TB
-                AGENT["Autonomous QE Agent<br/><small>OpenClaw / Custom Agent</small>"]:::agent
+                AGENT["Autonomous Agent<br/><small>OpenClaw / Custom Agent</small>"]:::agent
                 PLUG["NemoClaw Plugin<br/><small>Managed configuration</small>"]:::sandbox
             end
         end
@@ -122,25 +122,25 @@ NemoClaw implements the "Claw" principle for AI security:
 
 ## Observability & Enterprise Scalability
 
-For production-grade QE environments, NemoClaw should be extended with the following patterns:
+For production-grade agent environments, NemoClaw should be extended with the following patterns:
 
 ### 1. Distributed Tracing (OpenTelemetry)
 To monitor the latency of autonomous agents, integrate OpenTelemetry spans at the Gateway level. This allows you to differentiate between agent "thinking" time and inference provider response time.
 
 ### 2. High Availability (HA)
-In large-scale testing cycles, deploy a cluster of OpenShell Gateways behind an L7 Load Balancer. Use an external secrets manager (like **Azure Key Vault** or **GCP Secret Manager**) as the backing store for the gateway's credential provider.
+In large-scale operation cycles, deploy a cluster of OpenShell Gateways behind an L7 Load Balancer. Use an external secrets manager (like **Azure Key Vault** or **GCP Secret Manager**) as the backing store for the gateway's credential provider.
 
 ### 3. Stateful Migration
-Leverage NemoClaw's **Snapshot/Restore** feature to move long-running QE agents between nodes (e.g., from local workstations to cloud-based Spot instances) without losing the agent's conversation or filesystem state.
+Leverage NemoClaw's **Snapshot/Restore** feature to move long-running agents between nodes (e.g., from local workstations to cloud-based Spot instances) without losing the agent's conversation or filesystem state.
 
 ---
 
-## QE Integration: The Autonomous Gatekeeper
+## Agent Integration: The Autonomous Gatekeeper
 
-In our **AI-Powered QE** stack, NemoClaw acts as the execution layer for autonomous agents that:
+In our **Sovereign AI** stack, NemoClaw acts as the execution layer for autonomous agents that:
 
 -   **Analyze Codebases**: Safely clones and reads code without risking host machine compromise.
--   **Execute Tests**: Runs test suites in a clean, ephemeral environment.
--   **Report Defects**: Communicates with Jira/GitHub via the secure gateway.
+-   **Execute Verification**: Runs verification suites in a clean, ephemeral environment.
+-   **Report Anomalies**: Communicates with Jira/GitHub via the secure gateway.
 
-By hosting our QE intelligence in NemoClaw, we ensure that our "Principal Architect" grade solutions are not only smart but enterprise-hardened.
+By hosting our agent intelligence in NemoClaw, we ensure that our "Principal Architect" grade solutions are not only smart but enterprise-hardened.

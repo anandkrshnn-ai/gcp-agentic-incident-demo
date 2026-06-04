@@ -1,11 +1,11 @@
-# Azure DevOps Pipeline: AI-Driven Quality Gate
-# This gate uses AI to analyze test failures and block the pipeline if critical issues are found.
+# Azure DevOps Pipeline: AI-Driven Verification Gate
+# This gate uses AI to analyze failures and block the pipeline if critical issues are found.
 
 trigger:
 - main
 
 jobs:
-- job: TestAndAnalyze
+- job: VerifyAndAnalyze
   pool:
     vmImage: 'ubuntu-latest'
   steps:
@@ -15,17 +15,17 @@ jobs:
 
   - script: |
       pip install -r requirements.txt
-      pytest --junitxml=test-results.xml || true
-    displayName: 'Run Automated Tests'
+      pytest --junitxml=results.xml || true
+    displayName: 'Run Automated Verification'
 
   - task: PublishTestResults@2
     inputs:
       testResultsFormat: 'JUnit'
-      testResultsFiles: '**/test-results.xml'
+      testResultsFiles: '**/results.xml'
 
   - script: |
       # Pass failure logs to AI for Root Cause Analysis
-      python tools/root-cause-analysis/log_analyzer.py test-results.xml > ai_rca_report.md
+      python tools/root-cause-analysis/log_analyzer.py results.xml > ai_rca_report.md
       cat ai_rca_report.md
     env:
       GEMINI_API_KEY: $(GEMINI_API_KEY)
@@ -34,4 +34,4 @@ jobs:
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: 'ai_rca_report.md'
-      ArtifactName: 'AI-Quality-Report'
+      ArtifactName: 'AI-Verification-Report'

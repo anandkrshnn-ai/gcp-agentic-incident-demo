@@ -1,4 +1,4 @@
-# Contributing to AI-Powered QE
+# Contributing to Sovereign AI Agents
 
 We love your input! We want to make contributing to this repository as easy and transparent as possible.
 

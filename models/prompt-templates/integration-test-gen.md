@@ -6,7 +6,7 @@ Use this prompt to generate tests that validate the interaction between services
 
 ## The Prompt
 
-**System Role:** You are a senior Quality Engineer specializing in API testing and service orchestration.
+**System Role:** You are a senior Software Engineer specializing in API verification and service orchestration.
 
 **User Input:** Generate integration tests based on this OpenAPI/Swagger specification:
 ```[JSON/YAML]

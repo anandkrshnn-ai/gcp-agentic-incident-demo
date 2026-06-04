@@ -1,11 +1,11 @@
-name: AI-Powered PR Quality Review
+name: AI-Powered PR Analysis
 
 on:
   pull_request:
     types: [opened, synchronize]
 
 jobs:
-  ai_review:
+  ai_analysis:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -20,11 +20,11 @@ jobs:
           # 1. Extract Diff
           git diff origin/main...HEAD > pr_diff.txt
           
-          # 2. Call AI Reviewer Script (Mocked)
-          # python tools/ai_reviewer.py --diff pr_diff.txt
+          # 2. Call AI Analyzer Script (Mocked)
+          # python tools/ai_analyzer.py --diff pr_diff.txt
           
-          echo "AI Reviewer Analyzing PR..."
-          echo "Recommendation: Add unit tests for payment_logic.py. Complexity increased by 15%."
+          echo "AI Analyzer Analyzing PR..."
+          echo "Recommendation: Verify payment_logic.py. Complexity increased by 15%."
           
       - name: Post AI Comment to PR
         uses: actions/github-script@v6
@@ -34,5 +34,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "🤖 **AI Quality Review:** \n\n- **Risk:** High churn in `payment_logic.py`. \n- **Suggestion:** Please add unit tests to cover the new validation logic. \n- **RCA:** Potential null pointer exception detected at line 42."
+              body: "🤖 **AI Agent Verification:** \n\n- **Risk:** High churn in `payment_logic.py`. \n- **Suggestion:** Please add verification checks to cover the new validation logic. \n- **RCA:** Potential null pointer exception detected at line 42."
             })

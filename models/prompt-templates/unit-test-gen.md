@@ -6,7 +6,7 @@ Use this prompt to generate high-coverage unit tests for any function or class.
 
 ## The Prompt
 
-**System Role:** You are a senior Quality Engineer specializing in [Language, e.g., Python/Java]. Your goal is to achieve 100% branch coverage and identify potential edge cases.
+**System Role:** You are a senior Software Engineer specializing in verification in [Language, e.g., Python/Java]. Your goal is to achieve 100% branch coverage and identify potential edge cases.
 
 **User Input:** Generate unit tests for the following code snippet:
 ```[Language]

@@ -8,15 +8,15 @@ from typing import List, Dict, Any
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-class AIQEAnalyzer:
+class AISovereignAnalyzer:
     """
-    Advanced AI-Powered Quality Engineering Analyzer.
-    Provides automated triage, root cause analysis, and defect prediction.
+    Advanced Sovereign AI Analyzer.
+    Provides automated triage, root cause analysis, and failure prediction.
     """
 
     def __init__(self, model_version: str = "v1-alpha"):
         self.model_version = model_version
-        logger.info(f"Initializing AI-QE Analyzer {self.model_version}")
+        logger.info(f"Initializing Sovereign AI Analyzer {self.model_version}")
 
     def parse_logs(self, log_file_path: str) -> List[str]:
         """Extracts stack traces and error messages from log files."""
@@ -49,7 +49,7 @@ class AIQEAnalyzer:
         elif "Timeout" in error_trace:
             return {
                 "root_cause": "Downstream Service Latency",
-                "explanation": "The call to the external payment gateway exceeded the 5000ms threshold.",
+                "explanation": "The call to the external gateway exceeded the 5000ms threshold.",
                 "reproducibility": "Medium",
                 "suggested_fix": "Increase timeout threshold or implement a circuit breaker pattern."
             }
@@ -76,13 +76,13 @@ class AIQEAnalyzer:
         return risk_map
 
 if __name__ == "__main__":
-    analyzer = AIQEAnalyzer()
+    analyzer = AISovereignAnalyzer()
     
     # Example Workflow
     sample_trace = "Traceback (most recent call last):\n  File 'app.py', line 10, in main\n    print(user.name)\nAttributeError: 'NoneType' object has no attribute 'name'"
     rca_report = analyzer.perform_rca(sample_trace)
     
-    print("\n--- AI-QE Root Cause Analysis Report ---")
+    print("\n--- Sovereign AI Root Cause Analysis Report ---")
     print(json.dumps(rca_report, indent=4))
     
     files = ["auth.py", "database.sql", "README.md"]
