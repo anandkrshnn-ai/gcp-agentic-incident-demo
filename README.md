@@ -1,76 +1,44 @@
-# Sovereign AI Agents - Scaling Intelligence and Resilience
+# GCP Agentic Incident Demo
 
-**Harness the power of Generative AI and Machine Learning to revolutionize autonomous systems.**
+This is a **simple educational demo** showing basic integration of Gemini with git history analysis and log parsing. It is **not production ready** and contains no novel research or advanced AI techniques.
 
-This repository contains **executable tools, strategy frameworks, and integration patterns** for implementing Sovereign AI Agents—from automated system verification to intelligent telemetry analysis and root cause remediation.
+## Overview
 
-Used by forward-thinking engineering leaders to increase operational velocity and build self-governing systems.
+This repository contains basic helper scripts to demonstrate:
+1. **Git Churn Analyzer**: Analyzes local git commit history and diff stat size to identify files with high churn.
+2. **Log Analyzer**: Parses log stack traces and uses Gemini to generate a basic root cause analysis (RCA) report.
+3. **Test Generator**: Generates simple, runnable pytest or Playwright test files from natural language descriptions via Gemini.
 
-![MIT License](https://img.shields.io/badge/license-MIT-green)
-![Python](https://img.shields.io/badge/python-3.9+-blue)
-![AI](https://img.shields.io/badge/AI-Generative-orange)
+## Structure
 
-## Why this matters
+- [tools/git_churn_analyzer.py](file:///c:/Users/Admin/Documents/Github/gcp-agentic-incident-demo/tools/git_churn_analyzer.py) — Analyzes local git repository commit history.
+- [tools/log_analyzer.py](file:///c:/Users/Admin/Documents/Github/gcp-agentic-incident-demo/tools/log_analyzer.py) — Parses log outputs and suggests fixes using Gemini.
+- [tools/test_generator.py](file:///c:/Users/Admin/Documents/Github/gcp-agentic-incident-demo/tools/test_generator.py) — Generates verification scripts using Gemini.
+- [integration/](file:///c:/Users/Admin/Documents/Github/gcp-agentic-incident-demo/integration) — Minimal pipeline integration examples for GitHub Actions and Azure DevOps.
 
-The traditional automated operations model is broken:
-- ❌ Hardcoded scripts are too brittle for dynamic environments
-- ❌ Identifying high-risk anomalies is a guessing game
-- ❌ Log analysis for failures takes hours of manual work
-- ❌ Traditional guardrails lack context-aware decisioning
+## Setup & Configuration
 
-**This changes that.** We provide:
-- ✅ **LLM-Driven Action Generation:** Convert requirements into robust operations scripts.
-- ✅ **Intelligent Anomaly Prediction:** Predict where the next failure will occur using git history and ML.
-- ✅ **Automated Root Cause Analysis (RCA):** Feed failure logs to AI to get immediate fix suggestions.
-- ✅ **Sovereign AI Strategy & Governance:** Frameworks for high-accuracy, compliant agent deployments.
+Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-## What's inside
+Set the Gemini API Key:
+```bash
+export GEMINI_API_KEY="your-api-key"
+```
 
-### 🛠️ **Tools** (Run these now)
-- **[Action Generator](tools/test-generation/)** — Convert natural language to automated scripts.
-- **[Anomaly Predictor](tools/defect-prediction/)** — Risk-based modeling powered by code analytics.
-- **[Log Analyzer](tools/root-cause-analysis/)** — Root cause analysis from execution logs.
+## Running the Tools
 
-### 📚 **Frameworks & Strategy**
-- **[Sovereign AI Strategy Framework](docs/01-ai-agent-strategy-framework.md)** — Balancing speed with reliability.
-- **[NemoClaw Build Guide](docs/03-building-nemoclaw-for-autonomous-agents.md)** — Secure runtime for autonomous agents.
-- **[Prompt Templates for Agents](models/prompt-templates/)** — Curated prompts for unit, integration, and security verification.
-
-### 🔗 **Integrations**
-- **[GitHub Actions + AI](integration/github-actions/)** — Automated PR analysis and check generation.
-- **[Azure DevOps + AI](integration/azure-devops/)** — Intelligent gates for enterprise pipelines.
-
-### 📖 **Examples & Case Studies**
-- [Case Study: 80% Faster Regression Analysis](examples/case-studies/regression-speedup.md)
-- [Example: Predicting Bugs in a Microservices Architecture](examples/case-studies/defect-prediction-demo.md)
-- **[Antigravity Awesome Skills](https://github.com/sickn33/antigravity-awesome-skills)** — Over 1,400+ agentic skills installed for agent orchestration.
-
-## Tech stack
-
-- **LLMs:** OpenAI (GPT-4), Google Gemini, Anthropic Claude
-- **Languages:** Python, TypeScript
-- **Automation:** Playwright, Selenium, JUnit
-- **Analytics:** Pandas, Scikit-learn, Git-python
-
-## 🔗 Related Repositories
-- [gcp-incident-analysis-demo](https://github.com/anandkrshnn-ai/gcp-incident-analysis-demo)
-
-## Contributing
-
-We welcome contributions! See **[CONTRIBUTING.md](CONTRIBUTING.md)** for details.
-
-## Strategic Intent
-
-AI is entering the **Era of Autonomy**. 
-
-Standard script automation is no longer enough to keep pace with the exponential growth of software complexity. This repository demonstrates how to leverage **Generative AI and Machine Learning** to move beyond manual maintenance. By using AI to generate actions from natural language, predict where failures will occur before code is merged, and automatically triage failure logs, we enable teams to operate at a scale previously impossible. 
-
-The goal is to transform roles from manual operators to **"Intelligence Architects"** who design the systems that verify and heal software.
-
-## 🎯 Purpose
-
-MIT License — Use freely, attribution appreciated.
-
----
-
-**Built for the next generation of engineers who lead with intelligence.**
+1. **Git Churn Analyzer**:
+   ```bash
+   python tools/git_churn_analyzer.py
+   ```
+2. **Log Analyzer**:
+   ```bash
+   python tools/log_analyzer.py <path_to_log_file>
+   ```
+3. **Test Generator**:
+   ```bash
+   python tools/test_generator.py --feature "Verify user login page title is correct" --lang playwright
+   ```
