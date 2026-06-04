@@ -7,14 +7,13 @@ import ast
 import argparse
 import fnmatch
 
-# =====================================================================
-# Extensible Complexity Analyzer Registry (Plugin Pattern)
-# =====================================================================
-
-def get_python_complexity(filepath):
+def get_ast_complexity(filepath):
     """
     Calculates a cyclomatic-style complexity score for a Python file by counting branching points in the AST.
+    Returns 0 for non-Python files or files that cannot be parsed.
     """
+    if not filepath.endswith(".py") or not os.path.exists(filepath):
+        return 0
     try:
         with open(filepath, "r", encoding="utf-8") as f:
             tree = ast.parse(f.read())
@@ -30,50 +29,6 @@ def get_python_complexity(filepath):
         return complexity
     except Exception:
         return 0
-
-def get_generic_complexity(filepath):
-    """
-    Fallback complexity analyzer for non-Python files.
-    Calculates a primitive structural density score based on indentations and block structures.
-    """
-    if not os.path.exists(filepath):
-        return 0
-    try:
-        score = 1
-        with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
-            for line in f:
-                # Count common control flow keywords and indentation shifts
-                line_stripped = line.strip()
-                if not line_stripped:
-                    continue
-                
-                # Check indentation level shifts (heuristically, tabs/spaces)
-                indent = len(line) - len(line.lstrip())
-                if indent >= 4:
-                    score += indent // 4
-                
-                # Branch keyword heuristic matching
-                words = line_stripped.split()
-                if words:
-                    first_word = words[0]
-                    if first_word in ("if", "for", "while", "catch", "except", "case", "switch"):
-                        score += 1
-        return score
-    except Exception:
-        return 0
-
-# Register complexity analyzers by file extension
-COMPLEXITY_REGISTRY = {
-    ".py": get_python_complexity,
-}
-
-def get_ast_complexity(filepath):
-    """
-    Dispatches file to its registered analyzer or falls back to a generic indicator.
-    """
-    ext = os.path.splitext(filepath)[1].lower()
-    analyzer = COMPLEXITY_REGISTRY.get(ext, get_generic_complexity)
-    return analyzer(filepath)
 
 # =====================================================================
 # Robust Statistical Scoring Model
@@ -266,9 +221,9 @@ def main():
     parser.add_argument("--repo-path", default=".", help="Path to the target Git repository")
     parser.add_argument("--half-life", type=float, default=30.0, help="Exponential decay half-life in days (0 to disable decay)")
     parser.add_argument("--time-window", type=int, default=0, help="Analyze commits only in the last N days (0 for all time)")
-    parser.add_argument("--weight-churn", type=float, default=0.3, help="Risk score weight for decayed code churn (lines added/deleted)")
-    parser.add_argument("--weight-commits", type=float, default=0.3, help="Risk score weight for decayed commit frequency")
-    parser.add_argument("--weight-complexity", type=float, default=0.4, help="Risk score weight for AST complexity")
+    parser.add_argument("--weight-churn", type=float, default=0.5, help="Risk weight for decayed churn (Default: 0.5; maps to empirical software metrics research pointing to code churn as the strongest predictor of defects)")
+    parser.add_argument("--weight-commits", type=float, default=0.3, help="Risk weight for decayed commit frequency (Default: 0.3; reflects human context shifts and integration frequency)")
+    parser.add_argument("--weight-complexity", type=float, default=0.2, help="Risk weight for Python AST complexity (Default: 0.2; represents structural complexity contribution to bugs)")
     parser.add_argument("--exclude", nargs="*", default=[], help="Glob patterns of files/directories to exclude")
     parser.add_argument("--include", nargs="*", default=[], help="Glob patterns of files/directories to include")
     parser.add_argument("--limit", type=int, default=15, help="Maximum number of files to show in the output table")

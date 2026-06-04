@@ -25,15 +25,10 @@ This document details the concrete limitations, assumptions, and architectural c
 
 ## 2. Complexity Analysis & AST Limits
 
-### Indentation-Based Fallback Heuristics
-- **The Issue**: For non-Python files, the tool falls back to a generic complexity estimator that scans indentation shifts and keywords.
-- **The Reality**: The fallback parser does not construct an AST.
-- **The Consequence**: It can be easily fooled by multi-line strings, large blocks of commented-out code, minified source files, or formatting variations (e.g., switching between spaces and tabs).
-
-### Python AST Dependency
-- **The Issue**: Full semantic/syntactic complexity analysis is only supported for Python (`.py`) files.
-- **The Reality**: Non-Python files rely on the generic fallback estimator, which has lower fidelity.
-- **The Consequence**: Comparison of risk metrics between a Python file and a TypeScript file is structurally unbalanced.
+### Python AST Lock-In
+- **The Issue**: Full semantic and syntactic complexity analysis is only supported for Python (`.py`) files.
+- **The Reality**: Non-Python files bypass complexity calculations entirely and are assigned a hardcoded complexity score of `0`.
+- **The Consequence**: Comparison of risk metrics between a Python file and files of other languages (e.g. JavaScript, YAML, HTML) is structurally unbalanced. Python files will naturally have a higher risk score potential when AST complexity weights are applied.
 
 ---
 
